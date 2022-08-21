@@ -15,22 +15,22 @@ class DonatyBottomNavigationBar extends StatefulWidget {
 
 List<Widget> _buildScreens() {
   return [
-    LoginPage(),
+    // LoginPage(),
     NftListPage(),
     FoundationsPage(),
-    RegisterFoundationPage(),
-    SplashPage(),
+    // RegisterFoundationPage(),
+    // SplashPage(),
   ];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
-    PersistentBottomNavBarItem(
-      icon: Icon(Icons.home_filled),
-      title: ("Home"),
-      activeColorPrimary: DonatyColors.primaryColor3,
-      inactiveColorPrimary: DonatyColors.primaryColor4,
-    ),
+    // PersistentBottomNavBarItem(
+    //   icon: Icon(Icons.home_filled),
+    //   title: ("Home"),
+    //   activeColorPrimary: DonatyColors.primaryColor3,
+    //   inactiveColorPrimary: DonatyColors.primaryColor4,
+    // ),
     PersistentBottomNavBarItem(
       icon: Icon(Icons.home_filled),
       title: ("Home"),
@@ -43,18 +43,18 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
       activeColorPrimary: DonatyColors.primaryColor3,
       inactiveColorPrimary: DonatyColors.primaryColor4,
     ),
-    PersistentBottomNavBarItem(
-      icon: Icon(Icons.app_registration_outlined),
-      title: ("Register"),
-      activeColorPrimary: DonatyColors.primaryColor3,
-      inactiveColorPrimary: DonatyColors.primaryColor4,
-    ),
-    PersistentBottomNavBarItem(
-      icon: Icon(Icons.person),
-      title: ("Profile"),
-      activeColorPrimary: DonatyColors.primaryColor3,
-      inactiveColorPrimary: DonatyColors.primaryColor4,
-    ),
+    // PersistentBottomNavBarItem(
+    //   icon: Icon(Icons.app_registration_outlined),
+    //   title: ("Register"),
+    //   activeColorPrimary: DonatyColors.primaryColor3,
+    //   inactiveColorPrimary: DonatyColors.primaryColor4,
+    // ),
+    // PersistentBottomNavBarItem(
+    //   icon: Icon(Icons.person),
+    //   title: ("Profile"),
+    //   activeColorPrimary: DonatyColors.primaryColor3,
+    //   inactiveColorPrimary: DonatyColors.primaryColor4,
+    // ),
     // PersistentBottomNavBarItem(
     //   icon: Icon(CupertinoIcons.settings),
     //   title: ("Register Foundations"),
