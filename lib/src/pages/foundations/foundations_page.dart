@@ -3,6 +3,8 @@ import 'package:polygon_hackathon_flutter/my_colors.dart';
 import 'package:polygon_hackathon_flutter/src/models/foundation.dart';
 import 'package:polygon_hackathon_flutter/src/provider/foundations_provider.dart';
 
+import '../foundation_detail/foundation_detail_page.dart';
+
 class FoundationsPage extends StatefulWidget {
   @override
   _FoundationsPageState createState() => _FoundationsPageState();
@@ -28,6 +30,7 @@ class _FoundationsPageState extends State<FoundationsPage> {
             children: [
               SizedBox(height: size.height * 0.01),
               Header(size: size),
+              SizedBox(height: size.height * 0.02),
               Container(
                 height: size.height * 0.8,
                 child: FutureBuilder(
@@ -59,7 +62,7 @@ class _FoundationsPageState extends State<FoundationsPage> {
                     }
                   },
                 ),
-              )
+              ),
             ],
           ),
         )),
@@ -80,38 +83,45 @@ class FoundationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-          horizontal: size.width * 0.05, vertical: size.height * 0.01),
-      child: Stack(
-        children: [
-          Container(
-            width: size.width * 0.9,
-            height: size.width * 0.5,
-            child: Image.network(
-              foundation.image,
-              fit: BoxFit.cover,
-              color: Colors.black.withOpacity(0.6),
-              colorBlendMode: BlendMode.darken,
-            ),
-          ),
-          Positioned(
-            top: size.height * 0.11,
-            child: Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return FoundationDetailPage(foundation: foundation);
+        }));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: size.width * 0.05, vertical: size.height * 0.01),
+        child: Stack(
+          children: [
+            Container(
               width: size.width * 0.9,
-              child: Center(
-                child: Text(
-                  foundation.name,
-                  style: TextStyle(
-                    fontSize: size.height * 0.04,
-                    color: DonatyColors.primaryColor4,
-                    fontWeight: FontWeight.w600,
+              height: size.width * 0.5,
+              child: Image.network(
+                foundation.image,
+                fit: BoxFit.cover,
+                color: Colors.black.withOpacity(0.6),
+                colorBlendMode: BlendMode.darken,
+              ),
+            ),
+            Positioned(
+              top: size.height * 0.11,
+              child: Container(
+                width: size.width * 0.9,
+                child: Center(
+                  child: Text(
+                    foundation.name,
+                    style: TextStyle(
+                      fontSize: size.height * 0.04,
+                      color: DonatyColors.primaryColor4,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

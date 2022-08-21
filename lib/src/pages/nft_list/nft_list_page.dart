@@ -11,6 +11,15 @@ class NftListPage extends StatefulWidget {
 
 class _NftListPageState extends State<NftListPage> {
   TextStyle subtitleStyle = TextStyle(color: DonatyColors.primaryColor4);
+  ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +36,16 @@ class _NftListPageState extends State<NftListPage> {
                 Header(size: size, subtitleStyle: subtitleStyle),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                  height: size.height * 0.8,
+                  height: size.height,
                   child: FutureBuilder(
                       future: _nftsProvider.getNewestNfts(),
                       builder: (BuildContext context,
                           AsyncSnapshot<List<NftElement>> snapshot) {
                         if (snapshot.hasData && snapshot.data.length > 0) {
                           return GridView.builder(
+                              controller: _scrollController,
                               itemCount: snapshot.data?.length ?? 0,
+                              // physics: const AlwaysScrollableScrollPhysics(),
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
@@ -114,7 +125,9 @@ class _NftListPageState extends State<NftListPage> {
                       Container(
                         width: size.width * 0.12,
                         child: Text(
-                          nft.price.toString(),
+                          nft.price.toString() == "0"
+                              ? "Not sell"
+                              : nft.price.toString(),
                           style: subtitleStyle,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:polygon_hackathon_flutter/my_colors.dart';
 import 'package:polygon_hackathon_flutter/src/pages/foundations/foundations_page.dart';
-import 'package:polygon_hackathon_flutter/src/pages/login/login_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/nft_list/nft_list_page.dart';
-import 'package:polygon_hackathon_flutter/src/pages/register_foundation/register_foundation_page.dart';
-import 'package:polygon_hackathon_flutter/src/pages/splash/splash_page.dart';
 
 class DonatyBottomNavigationBar extends StatefulWidget {
   @override

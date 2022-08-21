@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:polygon_hackathon_flutter/src/api/environment.dart';
-import 'package:polygon_hackathon_flutter/src/models/nft_detailed_to_buy.dart';
+import 'package:polygon_hackathon_flutter/src/models/post.dart';
 
-class NftsDetailedProvider {
+class PostsProvider {
   BuildContext context;
 
   // ignore: missing_return
@@ -13,11 +13,10 @@ class NftsDetailedProvider {
     this.context = context;
   }
 
-  Future<NftDetailedElement> getDetailedNftInformation(
-      String address, String id) async {
+  Future<List<Result>> getPostsByFoundationWallet(String ethAddress) async {
     try {
       Uri url = Uri.parse(
-          '${Environment.donatyApiUrl}/nft/get-nfts-from-address-and-tokenid/$address/$id');
+          '${Environment.donatyApiUrl}/post/get-posts-by-foundation-wallet/$ethAddress');
 
       Map<String, String> headers = {
         'Content-type': 'application/json',
@@ -29,11 +28,11 @@ class NftsDetailedProvider {
         // new SharedPref().logout(context, sessionUser.uid);
       }
       final data = json.decode(response.body); //Categorias
-      NftDetailedElement nftDetailed = NftDetailedElement.fromJson(data["nft"]);
-      return nftDetailed;
+      Post postsList = Post.fromJson(data);
+      return postsList.postsList;
     } catch (e) {
       print('Error: $e');
-      return null;
+      return [];
     }
   }
 }

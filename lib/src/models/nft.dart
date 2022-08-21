@@ -53,7 +53,7 @@ class NftElement {
   String tokenId;
   String img;
   String title;
-  int price;
+  dynamic price;
   bool status;
   String logoFoundation;
   String nameFoundation;

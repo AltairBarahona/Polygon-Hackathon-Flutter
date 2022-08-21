@@ -39,10 +39,6 @@ class _NftDetailPageState extends State<NftDetailPage> {
       color: DonatyColors.primaryColor3,
       fontSize: size.height * 0.025,
     );
-    TextStyle descriptionStyle = TextStyle(
-      color: DonatyColors.primaryColor2,
-      fontSize: size.height * 0.025,
-    );
     return Scaffold(
         backgroundColor: DonatyColors.primaryColor1,
         body: SingleChildScrollView(
@@ -64,7 +60,8 @@ class _NftDetailPageState extends State<NftDetailPage> {
                         children: [
                           NftDescription(
                               nftDetailed: nftDetailed,
-                              subtitleStyle: subtitleStyle),
+                              subtitleStyle: subtitleStyle,
+                              size: size),
                           SizedBox(height: size.height * 0.01),
                           OwnedBy(
                               size: size,
@@ -106,30 +103,28 @@ class _NftDetailPageState extends State<NftDetailPage> {
                                 ),
                               ),
                               SizedBox(height: size.height * 0.02),
-                              Container(
-                                width: size.width * 0.9,
-                                height: size.height * 0.3,
-                                child: Text(
-                                  nftDetailed.description,
-                                  style: subtitleStyle,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
+                              SingleChildScrollView(
+                                child: Container(
+                                  width: size.width * 0.9,
+                                  // height: size.height * 0.3,
+                                  child: Text(
+                                    nftDetailed.description,
+                                    style: subtitleStyle,
+                                    // maxLines: 10,
+                                    // overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ),
+                              SizedBox(height: size.height * 0.02),
                             ],
                           ),
                         ],
                       );
                     } else if (!snapshot.hasData) {
                       return Center(
-                        child: Text(
-                          'No registered foundations',
-                          style: TextStyle(
-                              fontSize: size.height * 0.03,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      );
+                          child: Center(
+                        child: CircularProgressIndicator(),
+                      ));
                     } else {
                       return Center(
                         child: CircularProgressIndicator(),
@@ -336,18 +331,23 @@ class NftDescription extends StatelessWidget {
     Key key,
     @required this.nftDetailed,
     @required this.subtitleStyle,
+    @required this.size,
   }) : super(key: key);
 
   final NftDetailedElement nftDetailed;
   final TextStyle subtitleStyle;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      nftDetailed.description,
-      style: subtitleStyle,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
+    return Container(
+      width: size.width * 0.9,
+      child: Text(
+        nftDetailed.description,
+        style: subtitleStyle,
+        // maxLines: 2,
+        // overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
@@ -388,7 +388,7 @@ class Header extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height * 0.5,
-      // color: Colors.red,
+      // color: DonatyColors.primaryColor2,
       child: Stack(
         children: [
           Positioned(child: Image.asset('assets/img/ellipse1.png')),

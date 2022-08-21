@@ -6,7 +6,6 @@ import 'package:polygon_hackathon_flutter/src/global_widgets/my_snackbar.dart';
 import 'package:polygon_hackathon_flutter/src/models/foundation.dart';
 import 'package:polygon_hackathon_flutter/src/models/response_api.dart';
 import 'package:polygon_hackathon_flutter/src/provider/foundations_provider.dart';
-import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RegisterFoundationController {
   BuildContext context;
@@ -18,12 +17,10 @@ class RegisterFoundationController {
 
   File profileImage;
   PickedFile pickedFile;
-  ProgressDialog _progressDialog;
   FoundationsProvider _foundationsProvider = new FoundationsProvider();
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
-    _progressDialog = new ProgressDialog(context: context);
     _foundationsProvider.init(context);
   }
 

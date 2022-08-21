@@ -9,6 +9,7 @@ import '../models/nft.dart';
 class NftsProvider {
   BuildContext context;
 
+  // ignore: missing_return
   Future init(BuildContext context) {
     this.context = context;
   }
@@ -16,6 +17,29 @@ class NftsProvider {
   Future<List<NftElement>> getNewestNfts() async {
     try {
       Uri url = Uri.parse('${Environment.donatyApiUrl}/nft/get-newest-nfts');
+
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+      };
+
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 401) {
+        // MySnackbar.show(context, 'Sesión expirada');
+        // new SharedPref().logout(context, sessionUser.uid);
+      }
+      final data = json.decode(response.body); //Categorias
+      Nft nftList = Nft.fromJson(data);
+      return nftList.nftsList;
+    } catch (e) {
+      print('Error: $e');
+      return [];
+    }
+  }
+
+  Future<List<NftElement>> getNftsFromCause(String address) async {
+    try {
+      Uri url = Uri.parse(
+          '${Environment.donatyApiUrl}/nft/get-nfts-from-cause/$address');
 
       Map<String, String> headers = {
         'Content-type': 'application/json',

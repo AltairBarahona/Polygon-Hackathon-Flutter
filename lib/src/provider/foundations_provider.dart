@@ -10,6 +10,7 @@ import 'package:polygon_hackathon_flutter/src/models/response_api.dart';
 class FoundationsProvider extends ChangeNotifier {
   BuildContext context;
 
+  // ignore: missing_return
   Future init(BuildContext context) {
     this.context = context;
   }
