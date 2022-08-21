@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -52,31 +51,32 @@ class RegisterFoundationController {
       description: description,
       ethAddress: "asd",
     );
-    _progressDialog.show(max: 100, msg: 'Espere un momento');
+    // _progressDialog.show(max: 100, msg: 'Espere un momento');
     try {
       ResponseApi responseDonatyApi = await _foundationsProvider
           .registerFoundation(foundation, profileImage);
       if (responseDonatyApi == null) {
-        _progressDialog.close();
+        // _progressDialog.close();
         MySnackbar.show(context, "Error con respuesta de API");
 
         return;
       }
       if (responseDonatyApi.success != null && responseDonatyApi.success) {
-        _progressDialog.close();
+        // _progressDialog.close();
         MySnackbar.show(context, responseDonatyApi.message);
       } else if (responseDonatyApi.message != null) {
-        _progressDialog.close();
+        // _progressDialog.close();
 
         MySnackbar.show(context, responseDonatyApi.message);
       } else {
-        _progressDialog.close();
+        // _progressDialog.close();
         MySnackbar.show(context, "Error con respuesta de API 2");
       }
     } catch (e) {
-      _progressDialog.close();
+      // _progressDialog.close();
       MySnackbar.show(context, e.toString());
     }
+    // _progressDialog.close();
   }
 
   void resetValues() {
@@ -95,11 +95,11 @@ class RegisterFoundationController {
         profileImage = File(pickedFile.path);
       }
     }
-    Navigator.pop(context);
+    // Navigator.pop(context);
     refresh();
   }
 
-  void showAlertDialog(int fileNumber) {
+  void showAlertDialog(int fileNumber, BuildContext context) {
     Widget galleryButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.gallery, fileNumber);

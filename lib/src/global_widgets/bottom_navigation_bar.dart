@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:polygon_hackathon_flutter/my_colors.dart';
 import 'package:polygon_hackathon_flutter/src/pages/foundations/foundations_page.dart';
-import 'package:polygon_hackathon_flutter/src/pages/home/home_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/login/login_page.dart';
+import 'package:polygon_hackathon_flutter/src/pages/nft_list/nft_list_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/register_foundation/register_foundation_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/splash/splash_page.dart';
 
@@ -17,35 +16,41 @@ class DonatyBottomNavigationBar extends StatefulWidget {
 List<Widget> _buildScreens() {
   return [
     LoginPage(),
+    NftListPage(),
     FoundationsPage(),
-    SplashPage(),
-    // HomePage(),
     RegisterFoundationPage(),
+    SplashPage(),
   ];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
     PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.home),
+      icon: Icon(Icons.home_filled),
       title: ("Home"),
       activeColorPrimary: DonatyColors.primaryColor3,
       inactiveColorPrimary: DonatyColors.primaryColor4,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.settings),
+      icon: Icon(Icons.home_filled),
+      title: ("Home"),
+      activeColorPrimary: DonatyColors.primaryColor3,
+      inactiveColorPrimary: DonatyColors.primaryColor4,
+    ),
+    PersistentBottomNavBarItem(
+      icon: Icon(Icons.favorite_border),
       title: ("Foundations"),
       activeColorPrimary: DonatyColors.primaryColor3,
       inactiveColorPrimary: DonatyColors.primaryColor4,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.home),
+      icon: Icon(Icons.app_registration_outlined),
       title: ("Register"),
       activeColorPrimary: DonatyColors.primaryColor3,
       inactiveColorPrimary: DonatyColors.primaryColor4,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(CupertinoIcons.settings),
+      icon: Icon(Icons.person),
       title: ("Profile"),
       activeColorPrimary: DonatyColors.primaryColor3,
       inactiveColorPrimary: DonatyColors.primaryColor4,

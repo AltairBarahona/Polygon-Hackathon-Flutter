@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:polygon_hackathon_flutter/src/api/environment.dart';
 import 'package:polygon_hackathon_flutter/src/models/foundation.dart';
-import 'package:path/path.dart' as Path;
 import 'package:polygon_hackathon_flutter/src/models/response_api.dart';
 
-class FoundationsProvider {
+class FoundationsProvider extends ChangeNotifier {
   BuildContext context;
 
   Future init(BuildContext context) {
@@ -58,41 +57,7 @@ class FoundationsProvider {
 
       final data = json.decode(response.body); //Categorias
       final responseApi = ResponseApi.fromJson(data);
-      return responseApi;
-      ;
-    } catch (e) {
-      print("Error: " + e.toString());
-      return null;
-    }
-  }
-
-  Future<ResponseApi> registerFoundation2(
-      FoundationElement foundation, File profileImage) async {
-    try {
-      Uri url =
-          Uri.parse('${Environment.donatyApiUrl}/foundation/create-foundation');
-      final response = await http.post(
-        url,
-        body: json.encode({
-          "name": foundation.name,
-          "email": foundation.email,
-          "country": foundation.country,
-          "description": foundation.description,
-          "image": http.MultipartFile.fromBytes(
-            'image',
-            profileImage.readAsBytesSync(),
-          ),
-          "ethAddress": "123456789"
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
-      final data = json.decode(response.body); //Mapa de valores
-
-      ResponseApi responseApi = ResponseApi.fromJson(data);
-
-      // ResponseApi responseApi = ResponseApi.fromJson(data);
+      notifyListeners();
       return responseApi;
     } catch (e) {
       print("Error: " + e.toString());

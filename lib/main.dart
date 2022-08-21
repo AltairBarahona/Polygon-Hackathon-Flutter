@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:polygon_hackathon_flutter/src/pages/nft_detail/nft_detail_page.dart';
+import 'package:polygon_hackathon_flutter/src/pages/nft_list/nft_list_page.dart';
 
 import 'package:polygon_hackathon_flutter/src/pages/splash/splash_page.dart';
 import 'src/pages/login/login_page.dart';
@@ -21,9 +22,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Donaty",
       home: HomePage(),
-      initialRoute: "login",
+      initialRoute: "home",
       routes: {
         "home": (context) => HomePage(),
+        "nftList": (context) => NftListPage(),
+        "nftDetail": (context) => NftDetailPage(),
         "login": (context) => LoginPage(),
         "splash": (context) => SplashPage(),
         "foundations": (context) => FoundationsPage(),

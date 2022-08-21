@@ -4,83 +4,102 @@
 
 import 'dart:convert';
 
-Nft nftFromJson(String str) => Nft.fromJson(json.decode(str));
+NftDetailed nftFromJson(String str) => NftDetailed.fromJson(json.decode(str));
 
-String nftToJson(Nft data) => json.encode(data.toJson());
+String nftToJson(NftDetailed data) => json.encode(data.toJson());
 
-class Nft {
-  Nft({
+class NftDetailed {
+  NftDetailed({
     this.success,
     this.message,
-    this.nftsList,
+    this.nft,
+    this.marketAddress,
   });
 
   bool success;
   String message;
-  List<NftElement> nftsList;
+  NftDetailedElement nft;
+  String marketAddress;
 
-  factory Nft.fromJson(Map<String, dynamic> json) => Nft(
+  factory NftDetailed.fromJson(Map<String, dynamic> json) => NftDetailed(
         success: json["success"],
         message: json["message"],
-        nftsList: List<NftElement>.from(
-            json["nfts"].map((x) => NftElement.fromJson(x))),
+        nft: NftDetailedElement.fromJson(json["nft"]),
+        marketAddress: json["marketAddress"],
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "nfts": List<dynamic>.from(nftsList.map((x) => x.toJson())),
+        "nft": nft.toJson(),
+        "marketAddress": marketAddress,
       };
 }
 
-class NftElement {
-  NftElement({
+class NftDetailedElement {
+  NftDetailedElement({
     this.address,
     this.nftContract,
     this.owner,
+    this.owned,
+    this.description,
     this.tokenId,
     this.img,
     this.title,
     this.price,
-    this.status,
+    this.cause,
     this.logoFoundation,
     this.nameFoundation,
+    this.status,
+    this.marketAddress,
   });
 
   String address;
   String nftContract;
   String owner;
+  String owned;
+  String description;
   String tokenId;
   String img;
   String title;
   int price;
-  bool status;
+  String cause;
   String logoFoundation;
   String nameFoundation;
+  bool status;
+  String marketAddress;
 
-  factory NftElement.fromJson(Map<String, dynamic> json) => NftElement(
-        address: json["address"],
+  factory NftDetailedElement.fromJson(Map<String, dynamic> json) =>
+      NftDetailedElement(
         nftContract: json["nftContract"],
         owner: json["owner"],
+        owned: json["owned"],
+        description: json["description"],
         tokenId: json["tokenId"],
         img: json["img"],
         title: json["title"],
         price: json["price"],
-        status: json["status"],
+        cause: json["cause"],
         logoFoundation: json["logo_foundation"],
         nameFoundation: json["name_foundation"],
+        status: json["status"],
+        marketAddress: json["marketAddress"],
       );
 
   Map<String, dynamic> toJson() => {
         "address": address,
         "nftContract": nftContract,
         "owner": owner,
+        "owned": owned,
+        "description": description,
         "tokenId": tokenId,
         "img": img,
         "title": title,
         "price": price,
-        "status": status,
+        "cause": cause,
         "logo_foundation": logoFoundation,
         "name_foundation": nameFoundation,
+        "status": status,
+        "marketAddress": marketAddress,
       };
 }

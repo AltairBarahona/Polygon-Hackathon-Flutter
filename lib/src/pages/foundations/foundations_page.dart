@@ -11,6 +11,12 @@ class FoundationsPage extends StatefulWidget {
 class _FoundationsPageState extends State<FoundationsPage> {
   FoundationsProvider _foundationsProvider = FoundationsProvider();
   @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -75,15 +81,16 @@ class FoundationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
       margin: EdgeInsets.symmetric(
           horizontal: size.width * 0.05, vertical: size.height * 0.01),
       child: Stack(
         children: [
           Container(
+            width: size.width * 0.9,
+            height: size.width * 0.5,
             child: Image.network(
               foundation.image,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
               color: Colors.black.withOpacity(0.6),
               colorBlendMode: BlendMode.darken,
             ),

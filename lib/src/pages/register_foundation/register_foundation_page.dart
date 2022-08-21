@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:polygon_hackathon_flutter/my_colors.dart';
-import 'package:polygon_hackathon_flutter/src/global_widgets/bottom_navigation_bar.dart';
 import 'package:polygon_hackathon_flutter/src/pages/register_foundation/register_foundation_controller.dart';
 
 class RegisterFoundationPage extends StatefulWidget {
@@ -45,7 +44,7 @@ class _RegisterFoundationPageState extends State<RegisterFoundationPage> {
                 DividerLine(size: size),
                 SizedBox(height: size.height * 0.02),
                 _foundationProfileImage(
-                    _registerFoundationController.profileImage, 1),
+                    _registerFoundationController.profileImage, 1, context),
                 _buttonCreateProduct()
               ],
             ),
@@ -174,13 +173,14 @@ class _RegisterFoundationPageState extends State<RegisterFoundationPage> {
     );
   }
 
-  Widget _foundationProfileImage(File imageFile, int fileNumber) {
+  Widget _foundationProfileImage(
+      File imageFile, int fileNumber, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            _registerFoundationController.showAlertDialog(fileNumber);
+            _registerFoundationController.showAlertDialog(fileNumber, context);
           },
           child: imageFile != null
               ? Card(
