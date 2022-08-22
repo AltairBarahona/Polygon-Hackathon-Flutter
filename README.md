@@ -54,7 +54,7 @@ Or go to pubspec.yaml in Visual Studio Code, right click -> Get Packages
 You are all set.
 
 ## Showcase
-1. HomePage
+1. Donaty App
 
 ![image](https://user-images.githubusercontent.com/65981231/185819823-b35d6c39-67d3-4ab2-949d-4188c21cb086.png)
 
