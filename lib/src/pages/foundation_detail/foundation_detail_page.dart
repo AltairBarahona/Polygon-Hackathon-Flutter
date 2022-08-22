@@ -17,9 +17,27 @@ class FoundationDetailPage extends StatefulWidget {
 
 class _FoundationDetailPageState extends State<FoundationDetailPage> {
   final FoundationElement currentFoundation;
+  ScrollController _scrollController = ScrollController();
   PostsProvider _postsProvider = new PostsProvider();
 
   _FoundationDetailPageState(this.currentFoundation);
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {}
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -37,70 +55,64 @@ class _FoundationDetailPageState extends State<FoundationDetailPage> {
 
     return Scaffold(
       backgroundColor: DonatyColors.primaryColor1,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              HeaderImage(size: size, currentFoundation: currentFoundation),
-              SizedBox(height: size.height * 0.02),
-              FoundationInfo(
-                  size: size,
-                  currentFoundation: currentFoundation,
-                  subtitleStyle: subtitleStyle,
-                  desccriptionStyle: desccriptionStyle),
-              Container(
-                width: size.width * 0.8,
-                height: size.height,
-                child: FutureBuilder(
-                    future: _postsProvider.getPostsByFoundationWallet(
-                        currentFoundation.ethAddress),
-                    builder: (context, AsyncSnapshot<List<Result>> snapshot) {
-                      if (snapshot.hasData && snapshot.data.length > 0) {
-                        return GridView.builder(
-                            itemCount: snapshot.data?.length ?? 0,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    childAspectRatio: 1.0,
-                                    crossAxisSpacing: size.width * 0.02,
-                                    mainAxisSpacing: size.width * 0.02),
-                            itemBuilder: (BuildContext context, int index) {
-                              Result post = snapshot.data[index];
-                              return _postCard(post, context);
-                            });
-                      } else if (snapshot.data?.length == 0) {
-                        return Center(
-                          child: Text(
-                            'No registered NFTs',
-                            style: TextStyle(
-                                fontSize: size.height * 0.03,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        );
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
-              ),
-            ],
+      body: ListView(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                HeaderImage(size: size, currentFoundation: currentFoundation),
+                SizedBox(height: size.height * 0.02),
+                FoundationInfo(
+                    size: size,
+                    currentFoundation: currentFoundation,
+                    subtitleStyle: subtitleStyle,
+                    desccriptionStyle: desccriptionStyle),
+              ],
+            ),
           ),
-        ),
+          Container(
+            width: size.width * 0.8,
+            height: size.height * 0.3,
+            child: FutureBuilder(
+                future: _postsProvider
+                    .getPostsByFoundationWallet(currentFoundation.ethAddress),
+                builder: (context, AsyncSnapshot<List<Result>> snapshot) {
+                  if (snapshot.hasData && snapshot.data.length > 0) {
+                    return GridView.builder(
+                        controller: _scrollController,
+                        itemCount: snapshot.data?.length ?? 0,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 1.0,
+                            crossAxisSpacing: size.width * 0.02,
+                            mainAxisSpacing: size.width * 0.02),
+                        itemBuilder: (BuildContext context, int index) {
+                          Result post = snapshot.data[index];
+                          return _postCard(post, context);
+                        });
+                  } else if (snapshot.data?.length == 0) {
+                    return Center(
+                      child: Text(
+                        'No registered NFTs',
+                        style: TextStyle(
+                            fontSize: size.height * 0.03,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
+          ),
+        ],
       ),
     );
   }
 
   Widget _postCard(Result post, context) {
-    TextStyle titleStyle = TextStyle(
-        color: DonatyColors.primaryColor4,
-        // fontSize: MediaQuery.of(context).size.height * 0.03,
-        fontWeight: FontWeight.bold);
-    TextStyle subtitleStyle = TextStyle(
-      color: DonatyColors.primaryColor4,
-      // fontSize: MediaQuery.of(context).size.height * 0.03,
-    );
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {

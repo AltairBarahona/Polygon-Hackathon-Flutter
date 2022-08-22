@@ -22,6 +22,12 @@ class _NftListPageState extends State<NftListPage> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     NftsProvider _nftsProvider = NftsProvider();

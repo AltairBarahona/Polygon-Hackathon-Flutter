@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:polygon_hackathon_flutter/src/pages/foundation_detail/foundation_detail_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/nft_detail/nft_detail_page.dart';
 import 'package:polygon_hackathon_flutter/src/pages/nft_list/nft_list_page.dart';
@@ -11,6 +12,11 @@ import 'package:polygon_hackathon_flutter/src/pages/foundations/foundations_page
 import 'package:polygon_hackathon_flutter/src/pages/register_foundation/register_foundation_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(new MyApp());
+  });
   runApp(MyApp());
 }
 
@@ -19,6 +25,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return MaterialApp(
       title: "Donaty",
       debugShowCheckedModeBanner: false,
