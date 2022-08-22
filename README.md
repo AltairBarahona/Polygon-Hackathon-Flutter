@@ -1,5 +1,5 @@
 # Polygon-hackathon-Flutter
-Mobile app in FLutter for Donaty Project on Polygon Hackathon.
+Mobile app in Flutter for Donaty Project on Polygon Hackathon.
 
 Donaty is the ultimate platform for Charities and Non-Profit organizations, allowing entities to create real impact projects on their communities and countries. NFT Artists can contribute to a charity proposal, selling their art and engaging into an Autonomous Decentralized Organization (DAO), NFT owners of each project will vote to decide if the funding is being used correctly as the charity responsible will have to upload regular updates stating the progress of their campaign.
 
